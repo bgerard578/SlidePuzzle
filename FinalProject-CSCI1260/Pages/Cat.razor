@@ -1,0 +1,605 @@
+﻿@using FinalProject_CSCI1260.Data
+@using FinalProject_CSCI1260.Services
+@inject ISlideService SlideService
+@page "/cat"
+@if (win)
+{
+    <h1 style="color:lime">Congratulations!!!</h1>
+    <br>
+    <h1 style="color:lime">Puzzle Solved!!!</h1>
+}
+<button @onclick="StartPuzzle">Start Puzzle</button>
+<h1></h1>
+<button @onclick="Shuffle">Suffle Puzzle</button>
+<h1></h1>
+<button @onclick="DeterminSwitch1" style="padding:0;background-color:@tile1Color;height:100px;width:100px"><img src="@tile1Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch2" style="padding:0;background-color:@tile2Color;height:100px;width:100px"><img src="@tile2Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch3" style="padding:0;background-color:@tile3Color;height:100px;width:100px"><img src="@tile3Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch4" style="padding:0;background-color:@tile4Color;height:100px;width:100px"><img src="@tile4Data" style="hight:100px;width:100px;" /></button>
+<br />
+<button @onclick="DeterminSwitch5" style="padding:0;background-color:@tile5Color;height:100px;width:100px"><img src="@tile5Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch6" style="padding:0;background-color:@tile6Color;height:100px;width:100px"><img src="@tile6Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch7" style="padding:0;background-color:@tile7Color;height:100px;width:100px"><img src="@tile7Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch8" style="padding:0;background-color:@tile8Color;height:100px;width:100px"><img src="@tile8Data" style="hight:100px;width:100px;" /></button>
+<br />
+<button @onclick="DeterminSwitch9" style="padding:0;background-color:@tile9Color;height:100px;width:100px"><img src="@tile9Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch10" style="padding:0;background-color:@tile10Color;height:100px;width:100px"><img src="@tile10Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch11" style="padding:0;background-color:@tile11Color;height:100px;width:100px"><img src="@tile11Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch12" style="padding:0;background-color:@tile12Color;height:100px;width:100px"><img src="@tile12Data" style="hight:100px;width:100px;" /></button>
+<br />
+<button @onclick="DeterminSwitch13" style="padding:0;background-color:@tile13Color;height:100px;width:100px"><img src="@tile13Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch14" style="padding:0;background-color:@tile14Color;height:100px;width:100px"><img src="@tile14Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch15" style="padding:0;background-color:@tile15Color;height:100px;width:100px"><img src="@tile15Data" style="hight:100px;width:100px;" /></button><button @onclick="DeterminSwitch16" style="padding:0;background-color:@tile16Color;height:100px;width:100px"><img src="@tile16Data" style="hight:100px;width:100px;" /></button>
+<h1></h1>
+@if (!win)
+{
+    <img src="Cat/Cat.jpg" />
+}
+<h1></h1>
+@code
+{
+    List<int> shuffle = new List<int>();
+    bool win = false;
+    List<int> order = new List<int>();
+    string tileData;
+    string tileColor;
+    string tile1Data;
+    string tile1Color;
+    string tile2Data;
+    string tile2Color;
+    string tile3Data;
+    string tile3Color;
+    string tile4Data;
+    string tile4Color;
+    string tile5Data;
+    string tile5Color;
+    string tile6Data;
+    string tile6Color;
+    string tile7Data;
+    string tile7Color;
+    string tile8Data;
+    string tile8Color;
+    string tile9Data;
+    string tile9Color;
+    string tile10Data;
+    string tile10Color;
+    string tile11Data;
+    string tile11Color;
+    string tile12Data;
+    string tile12Color;
+    string tile13Data;
+    string tile13Color;
+    string tile14Data;
+    string tile14Color;
+    string tile15Data;
+    string tile15Color;
+    string tile16Data;
+    string tile16Color;
+    /// <summary>
+    /// Starts the puzzle
+    /// </summary>
+    public void StartPuzzle()
+    {
+        SetTiles();
+        try
+        {
+            Shuffle();
+        }
+        catch (ShuffleException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+    /// <summary>
+    /// Assigns the tiles their background color and number/image
+    /// </summary>
+    public void SetTiles()
+    {
+        tile1Data = SlideService.alltiles.tiles["33"].GiveNum();
+        tile1Color = SlideService.alltiles.tiles["33"].GiveColor();
+        tile2Data = SlideService.alltiles.tiles["34"].GiveNum();
+        tile2Color = SlideService.alltiles.tiles["34"].GiveColor();
+        tile3Data = SlideService.alltiles.tiles["35"].GiveNum();
+        tile3Color = SlideService.alltiles.tiles["35"].GiveColor();
+        tile4Data = SlideService.alltiles.tiles["36"].GiveNum();
+        tile4Color = SlideService.alltiles.tiles["36"].GiveColor();
+        tile5Data = SlideService.alltiles.tiles["37"].GiveNum();
+        tile5Color = SlideService.alltiles.tiles["37"].GiveColor();
+        tile6Data = SlideService.alltiles.tiles["38"].GiveNum();
+        tile6Color = SlideService.alltiles.tiles["38"].GiveColor();
+        tile7Data = SlideService.alltiles.tiles["39"].GiveNum();
+        tile7Color = SlideService.alltiles.tiles["39"].GiveColor();
+        tile8Data = SlideService.alltiles.tiles["40"].GiveNum();
+        tile8Color = SlideService.alltiles.tiles["40"].GiveColor();
+        tile9Data = SlideService.alltiles.tiles["41"].GiveNum();
+        tile9Color = SlideService.alltiles.tiles["41"].GiveColor();
+        tile10Data = SlideService.alltiles.tiles["42"].GiveNum();
+        tile10Color = SlideService.alltiles.tiles["42"].GiveColor();
+        tile11Data = SlideService.alltiles.tiles["43"].GiveNum();
+        tile11Color = SlideService.alltiles.tiles["43"].GiveColor();
+        tile12Data = SlideService.alltiles.tiles["44"].GiveNum();
+        tile12Color = SlideService.alltiles.tiles["44"].GiveColor();
+        tile13Data = SlideService.alltiles.tiles["45"].GiveNum();
+        tile13Color = SlideService.alltiles.tiles["45"].GiveColor();
+        tile14Data = SlideService.alltiles.tiles["46"].GiveNum();
+        tile14Color = SlideService.alltiles.tiles["46"].GiveColor();
+        tile15Data = SlideService.alltiles.tiles["47"].GiveNum();
+        tile15Color = SlideService.alltiles.tiles["47"].GiveColor();
+        tile16Data = SlideService.alltiles.tiles["48"].GiveNum();
+        tile16Color = SlideService.alltiles.tiles["48"].GiveColor();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 1 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch1()
+    {
+        if (SlideService.alltiles.tiles["34"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["33"];
+            SlideService.alltiles.tiles["33"] = SlideService.alltiles.tiles["34"];
+            SlideService.alltiles.tiles["34"] = temp;
+        }
+        if (SlideService.alltiles.tiles["37"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["33"];
+            SlideService.alltiles.tiles["33"] = SlideService.alltiles.tiles["37"];
+            SlideService.alltiles.tiles["37"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 2 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch2()
+    {
+        if (SlideService.alltiles.tiles["33"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["34"];
+            SlideService.alltiles.tiles["34"] = SlideService.alltiles.tiles["33"];
+            SlideService.alltiles.tiles["33"] = temp;
+        }
+        if (SlideService.alltiles.tiles["35"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["34"];
+            SlideService.alltiles.tiles["34"] = SlideService.alltiles.tiles["35"];
+            SlideService.alltiles.tiles["35"] = temp;
+        }
+        if (SlideService.alltiles.tiles["38"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["34"];
+            SlideService.alltiles.tiles["34"] = SlideService.alltiles.tiles["38"];
+            SlideService.alltiles.tiles["38"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 3 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch3()
+    {
+        if (SlideService.alltiles.tiles["34"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["35"];
+            SlideService.alltiles.tiles["35"] = SlideService.alltiles.tiles["34"];
+            SlideService.alltiles.tiles["34"] = temp;
+        }
+        if (SlideService.alltiles.tiles["36"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["35"];
+            SlideService.alltiles.tiles["35"] = SlideService.alltiles.tiles["36"];
+            SlideService.alltiles.tiles["36"] = temp;
+        }
+        if (SlideService.alltiles.tiles["39"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["35"];
+            SlideService.alltiles.tiles["35"] = SlideService.alltiles.tiles["39"];
+            SlideService.alltiles.tiles["39"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 4 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch4()
+    {
+        if (SlideService.alltiles.tiles["35"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["36"];
+            SlideService.alltiles.tiles["36"] = SlideService.alltiles.tiles["35"];
+            SlideService.alltiles.tiles["35"] = temp;
+        }
+        if (SlideService.alltiles.tiles["40"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["36"];
+            SlideService.alltiles.tiles["36"] = SlideService.alltiles.tiles["40"];
+            SlideService.alltiles.tiles["40"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 5 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch5()
+    {
+        if (SlideService.alltiles.tiles["33"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["37"];
+            SlideService.alltiles.tiles["37"] = SlideService.alltiles.tiles["33"];
+            SlideService.alltiles.tiles["33"] = temp;
+        }
+        if (SlideService.alltiles.tiles["38"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["37"];
+            SlideService.alltiles.tiles["37"] = SlideService.alltiles.tiles["38"];
+            SlideService.alltiles.tiles["38"] = temp;
+        }
+        if (SlideService.alltiles.tiles["41"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["37"];
+            SlideService.alltiles.tiles["37"] = SlideService.alltiles.tiles["41"];
+            SlideService.alltiles.tiles["41"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 6 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch6()
+    {
+        if (SlideService.alltiles.tiles["34"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["38"];
+            SlideService.alltiles.tiles["38"] = SlideService.alltiles.tiles["34"];
+            SlideService.alltiles.tiles["34"] = temp;
+        }
+        if (SlideService.alltiles.tiles["37"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["38"];
+            SlideService.alltiles.tiles["38"] = SlideService.alltiles.tiles["37"];
+            SlideService.alltiles.tiles["37"] = temp;
+        }
+        if (SlideService.alltiles.tiles["39"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["38"];
+            SlideService.alltiles.tiles["38"] = SlideService.alltiles.tiles["39"];
+            SlideService.alltiles.tiles["39"] = temp;
+        }
+        if (SlideService.alltiles.tiles["42"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["38"];
+            SlideService.alltiles.tiles["38"] = SlideService.alltiles.tiles["42"];
+            SlideService.alltiles.tiles["42"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 7 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch7()
+    {
+        if (SlideService.alltiles.tiles["35"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["39"];
+            SlideService.alltiles.tiles["39"] = SlideService.alltiles.tiles["35"];
+            SlideService.alltiles.tiles["35"] = temp;
+        }
+        if (SlideService.alltiles.tiles["38"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["39"];
+            SlideService.alltiles.tiles["39"] = SlideService.alltiles.tiles["38"];
+            SlideService.alltiles.tiles["38"] = temp;
+        }
+        if (SlideService.alltiles.tiles["40"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["39"];
+            SlideService.alltiles.tiles["39"] = SlideService.alltiles.tiles["40"];
+            SlideService.alltiles.tiles["40"] = temp;
+        }
+        if (SlideService.alltiles.tiles["43"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["39"];
+            SlideService.alltiles.tiles["39"] = SlideService.alltiles.tiles["43"];
+            SlideService.alltiles.tiles["43"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 8 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch8()
+    {
+        if (SlideService.alltiles.tiles["36"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["40"];
+            SlideService.alltiles.tiles["40"] = SlideService.alltiles.tiles["36"];
+            SlideService.alltiles.tiles["36"] = temp;
+        }
+        if (SlideService.alltiles.tiles["39"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["40"];
+            SlideService.alltiles.tiles["40"] = SlideService.alltiles.tiles["39"];
+            SlideService.alltiles.tiles["39"] = temp;
+        }
+        if (SlideService.alltiles.tiles["44"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["40"];
+            SlideService.alltiles.tiles["40"] = SlideService.alltiles.tiles["44"];
+            SlideService.alltiles.tiles["44"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 9 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch9()
+    {
+        if (SlideService.alltiles.tiles["37"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["41"];
+            SlideService.alltiles.tiles["41"] = SlideService.alltiles.tiles["37"];
+            SlideService.alltiles.tiles["37"] = temp;
+        }
+        if (SlideService.alltiles.tiles["42"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["41"];
+            SlideService.alltiles.tiles["41"] = SlideService.alltiles.tiles["42"];
+            SlideService.alltiles.tiles["42"] = temp;
+        }
+        if (SlideService.alltiles.tiles["45"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["41"];
+            SlideService.alltiles.tiles["41"] = SlideService.alltiles.tiles["45"];
+            SlideService.alltiles.tiles["45"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 10 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch10()
+    {
+        if (SlideService.alltiles.tiles["38"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["42"];
+            SlideService.alltiles.tiles["42"] = SlideService.alltiles.tiles["38"];
+            SlideService.alltiles.tiles["38"] = temp;
+        }
+        if (SlideService.alltiles.tiles["41"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["42"];
+            SlideService.alltiles.tiles["42"] = SlideService.alltiles.tiles["41"];
+            SlideService.alltiles.tiles["41"] = temp;
+        }
+        if (SlideService.alltiles.tiles["43"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["42"];
+            SlideService.alltiles.tiles["42"] = SlideService.alltiles.tiles["43"];
+            SlideService.alltiles.tiles["43"] = temp;
+        }
+        if (SlideService.alltiles.tiles["46"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["42"];
+            SlideService.alltiles.tiles["42"] = SlideService.alltiles.tiles["46"];
+            SlideService.alltiles.tiles["46"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 11 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch11()
+    {
+        if (SlideService.alltiles.tiles["39"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["43"];
+            SlideService.alltiles.tiles["43"] = SlideService.alltiles.tiles["39"];
+            SlideService.alltiles.tiles["39"] = temp;
+        }
+        if (SlideService.alltiles.tiles["42"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["43"];
+            SlideService.alltiles.tiles["43"] = SlideService.alltiles.tiles["42"];
+            SlideService.alltiles.tiles["42"] = temp;
+        }
+        if (SlideService.alltiles.tiles["44"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["43"];
+            SlideService.alltiles.tiles["43"] = SlideService.alltiles.tiles["44"];
+            SlideService.alltiles.tiles["44"] = temp;
+        }
+        if (SlideService.alltiles.tiles["47"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["43"];
+            SlideService.alltiles.tiles["43"] = SlideService.alltiles.tiles["47"];
+            SlideService.alltiles.tiles["47"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 12 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch12()
+    {
+        if (SlideService.alltiles.tiles["40"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["44"];
+            SlideService.alltiles.tiles["44"] = SlideService.alltiles.tiles["40"];
+            SlideService.alltiles.tiles["40"] = temp;
+        }
+        if (SlideService.alltiles.tiles["43"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["44"];
+            SlideService.alltiles.tiles["44"] = SlideService.alltiles.tiles["43"];
+            SlideService.alltiles.tiles["43"] = temp;
+        }
+        if (SlideService.alltiles.tiles["48"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["44"];
+            SlideService.alltiles.tiles["44"] = SlideService.alltiles.tiles["48"];
+            SlideService.alltiles.tiles["48"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 13 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch13()
+    {
+        if (SlideService.alltiles.tiles["41"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["45"];
+            SlideService.alltiles.tiles["45"] = SlideService.alltiles.tiles["41"];
+            SlideService.alltiles.tiles["41"] = temp;
+        }
+        if (SlideService.alltiles.tiles["46"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["45"];
+            SlideService.alltiles.tiles["45"] = SlideService.alltiles.tiles["46"];
+            SlideService.alltiles.tiles["46"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 14 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch14()
+    {
+        if (SlideService.alltiles.tiles["42"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["46"];
+            SlideService.alltiles.tiles["46"] = SlideService.alltiles.tiles["42"];
+            SlideService.alltiles.tiles["42"] = temp;
+        }
+        if (SlideService.alltiles.tiles["45"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["46"];
+            SlideService.alltiles.tiles["46"] = SlideService.alltiles.tiles["45"];
+            SlideService.alltiles.tiles["45"] = temp;
+        }
+        if (SlideService.alltiles.tiles["47"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["46"];
+            SlideService.alltiles.tiles["46"] = SlideService.alltiles.tiles["47"];
+            SlideService.alltiles.tiles["47"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 15 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch15()
+    {
+        if (SlideService.alltiles.tiles["43"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["47"];
+            SlideService.alltiles.tiles["47"] = SlideService.alltiles.tiles["43"];
+            SlideService.alltiles.tiles["43"] = temp;
+        }
+        if (SlideService.alltiles.tiles["46"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["47"];
+            SlideService.alltiles.tiles["47"] = SlideService.alltiles.tiles["46"];
+            SlideService.alltiles.tiles["46"] = temp;
+        }
+        if (SlideService.alltiles.tiles["48"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["47"];
+            SlideService.alltiles.tiles["47"] = SlideService.alltiles.tiles["48"];
+            SlideService.alltiles.tiles["48"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks if the blank tile is next to tile 16 and switches their data if it is
+    /// </summary>
+    public void DeterminSwitch16()
+    {
+        if (SlideService.alltiles.tiles["44"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["48"];
+            SlideService.alltiles.tiles["48"] = SlideService.alltiles.tiles["44"];
+            SlideService.alltiles.tiles["44"] = temp;
+        }
+        if (SlideService.alltiles.tiles["47"].GiveColor() == "black")
+        {
+            Tile temp = SlideService.alltiles.tiles["48"];
+            SlideService.alltiles.tiles["48"] = SlideService.alltiles.tiles["47"];
+            SlideService.alltiles.tiles["47"] = temp;
+        }
+        SetTiles();
+        CheckWin();
+    }
+    /// <summary>
+    /// Checks to see if all the tiles are in the correct order
+    /// </summary>
+    public void CheckWin()
+    {
+        order.Clear();
+        order.Add(SlideService.alltiles.tiles["33"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["34"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["35"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["36"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["37"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["38"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["39"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["40"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["41"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["42"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["43"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["44"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["45"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["46"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["47"].GiveOrder());
+        order.Add(SlideService.alltiles.tiles["48"].GiveOrder());
+        if (order[0] == 1 && order[1] == 2 && order[2] == 3 && order[3] == 4 && order[4] == 5 && order[5] == 6 && order[6] == 7 && order[7] == 8 && order[8] == 9 && order[9] == 10 && order[10] == 11 && order[11] == 12 && order[12] == 13 && order[13] == 14 && order[14] == 15 && order[15] == 16)
+        {
+            win = true;
+        }
+        else
+        {
+            win = false;
+        }
+    }
+    /// <summary>
+    /// Generates 1000 randome numbers between 1 and 16 and then tries to switch the tile associated with the number for every number
+    /// </summary>
+    public void Shuffle()
+    {
+        if (tile1Data == null || tile2Data == null || tile3Data == null || tile4Data == null || tile5Data == null || tile6Data == null || tile7Data == null || tile8Data == null || tile9Data == null || tile10Data == null || tile11Data == null || tile12Data == null || tile13Data == null || tile14Data == null || tile15Data == null || tile16Data == null)
+        {
+            throw new ShuffleException("Shuffle Failed");
+        }
+        shuffle.Clear();
+        for (int i = 0; i < 1000; i++)
+        {
+            Random random = new Random();
+            int num = random.Next(1, 16);
+            shuffle.Add(num);
+        }
+        foreach (var num in shuffle)
+        {
+            if (num == 1) { DeterminSwitch1(); }
+            if (num == 2) { DeterminSwitch2(); }
+            if (num == 3) { DeterminSwitch3(); }
+            if (num == 4) { DeterminSwitch4(); }
+            if (num == 5) { DeterminSwitch5(); }
+            if (num == 6) { DeterminSwitch6(); }
+            if (num == 7) { DeterminSwitch7(); }
+            if (num == 8) { DeterminSwitch8(); }
+            if (num == 9) { DeterminSwitch9(); }
+            if (num == 10) { DeterminSwitch10(); }
+            if (num == 11) { DeterminSwitch11(); }
+            if (num == 12) { DeterminSwitch12(); }
+            if (num == 13) { DeterminSwitch13(); }
+            if (num == 14) { DeterminSwitch14(); }
+            if (num == 15) { DeterminSwitch15(); }
+            if (num == 16) { DeterminSwitch16(); }
+            win = false;
+        }
+    }
+}
